@@ -1,10 +1,21 @@
 const mongoose = require('mongoose');
-const dbURI = 'mongodb://localhost:27017/dashboard-finanzas-personales';
 
-main().catch(err => console.log(err));
+// main().catch(err => console.log(err));
 
-async function main () {
-    await mongoose.connect(dbURI);
-}
+// async function main () {
+//     await mongoose.connect(process.env.MONGO_URI);
+// }
 
-module.exports = main;
+// module.exports = main;
+
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log('✅ MongoDB conectado exitosamente');
+    } catch (error) {
+        console.error('❌ Error de conexión:', error.message);
+        process.exit(1)
+    }
+};
+
+module.exports = connectDB;
