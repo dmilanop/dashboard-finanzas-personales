@@ -15,7 +15,7 @@ const getUsers = async (req, res) => {
     };
 };
 
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
     const newUser = new User(req.body);
 
     try {
@@ -28,11 +28,7 @@ const createUser = async (req, res) => {
         });
 
     } catch (error) {
-        res.status(400).json({
-            ok: false,
-            mensaje: "No se pudo crear el usuario, llenar todos los campos",
-            error: error.message
-        });
+        next(error);
     };
 };
 
