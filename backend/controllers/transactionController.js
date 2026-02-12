@@ -1,6 +1,6 @@
 const Transaction = require('../models/TransactionSchema');
 
-const getTransactions = async (req, res) => {
+const getTransactions = async (req, res, next) => {
     try {
         const transactions = await Transaction.find();
 
@@ -11,15 +11,11 @@ const getTransactions = async (req, res) => {
         });
 
     } catch (error) {
-        res.status(500).json({
-            ok: false,
-            message: "Fallo al obtener las transacciones, error del servidor",
-            error: error.message
-        });
+        next(error);
     };
 };
 
-const createTransaction = async (req, res) => {
+const createTransaction = async (req, res, next) => {
     const newTransaction = new Transaction(req.body);
 
     try {
@@ -32,11 +28,7 @@ const createTransaction = async (req, res) => {
         });
 
     } catch (error) {
-        res.status(400).json({
-            ok: false,
-            message: "No se pudo crear la transacción, llenar todos los campos",
-            error: error.message
-        });
+        next(error);
     };
 };
 

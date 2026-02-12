@@ -2,10 +2,9 @@ require('dotenv').config();
 
 const express = require('express');
 const connectDB = require('./config/db');
+const errorHandler = require('./middlewares/errorMiddleware');
 const user = require('./routes/user');
 const transaction = require('./routes/transaction');
-const myLogger = require('./middlewares/myLoggerMiddleware');
-const errorHandler = require('./middlewares/errorMiddleware');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
