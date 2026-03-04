@@ -13,7 +13,6 @@ connectDB();
 
 // Middleware
 app.use(express.json());
-app.use(myLogger);
 
 // Ruta Users
 app.use('/api/users', user);
